@@ -130,16 +130,34 @@ export function ColophonSection() {
                 target="_blank"
                 className="font-mono text-xs text-foreground/80 hover:text-accent transition-colors duration-200"
               >
-                GitHub (@mxoizzz)
+                GitHub
               </a>
             </li>
             <li>
               <a
-                href="https://x.com/mxoizzz"
+                href="https://www.linkedin.com/in/moizshaikh007/"
                 target="_blank"
                 className="font-mono text-xs text-foreground/80 hover:text-accent transition-colors duration-200"
               >
-                X (Twitter)
+                LinkedIn
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://leetcode.com/u/mxoiz_07/"
+                target="_blank"
+                className="font-mono text-xs text-foreground/80 hover:text-accent transition-colors duration-200"
+              >
+                LeetCode
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://www.instagram.com/__mxoizz/"
+                target="_blank"
+                className="font-mono text-xs text-foreground/80 hover:text-accent transition-colors duration-200"
+              >
+                Instagram
               </a>
             </li>
           </ul>
