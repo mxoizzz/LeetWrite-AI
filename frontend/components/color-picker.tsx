@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { useTheme } from "next-themes";
+import { Moon, Sun } from "lucide-react";
 
 const COLORS = [
   { id: "orange", label: "Orange", hex: "#f97316" }, // Approximation for the UI
@@ -14,6 +16,7 @@ const COLORS = [
 export function ColorPicker() {
   const [activeColor, setActiveColor] = useState("orange");
   const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
@@ -42,10 +45,19 @@ export function ColorPicker() {
           />
         </div>
         
-        {/* Expanded Color Palette */}
+        {/* Expanded Palette and Theme Toggle */}
         <div className="absolute bottom-12 flex flex-col gap-2 p-2 border border-border/50 bg-background/95 backdrop-blur opacity-0 translate-y-4 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+          
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="flex h-8 w-8 items-center justify-center border border-transparent transition-all duration-200 hover:border-border text-foreground mb-1"
+            title="Toggle Light/Dark Mode"
+          >
+            {theme === "dark" ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+          </button>
+          
           <div className="mb-1 text-center font-mono text-[8px] uppercase tracking-widest text-muted-foreground">
-            Theme
+            Color
           </div>
           {COLORS.map((c) => (
             <button

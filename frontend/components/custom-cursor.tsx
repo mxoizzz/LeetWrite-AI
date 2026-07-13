@@ -44,7 +44,7 @@ export function CustomCursor() {
     <div
       ref={cursorRef}
       className={cn(
-        "pointer-events-none fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-[9999] mix-blend-difference hidden md:block",
+        "pointer-events-none fixed top-0 left-0 -translate-x-1/2 -translate-y-1/2 z-[9999] hidden md:block dark:mix-blend-difference",
         "w-8 h-8 rounded-full border-2 border-accent bg-accent/20",
         "transition-opacity duration-300",
         isVisible ? "opacity-100" : "opacity-0",
