@@ -1,10 +1,19 @@
 <div align="center">
   <img src="https://img.icons8.com/color/96/000000/code.png" alt="Logo" width="80" height="80">
   <h1 align="center">LeetWrite AI</h1>
+  
   <p align="center">
-    A production-ready AI SaaS tool designed to automatically generate high-quality, professional LeetCode discussion posts from accepted solutions.
-    <br />
-    <br />
+    <strong>A production-ready AI tool that automatically generates high-quality, professional LeetCode discussion posts from your accepted solutions.</strong>
+  </p>
+  
+  <p align="center">
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/stargazers"><img src="https://img.shields.io/github/stars/mxoizzz/LeetWrite-AI?style=for-the-badge&color=eab308" alt="Stars Badge"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/network/members"><img src="https://img.shields.io/github/forks/mxoizzz/LeetWrite-AI?style=for-the-badge&color=3b82f6" alt="Forks Badge"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge&color=10b981" alt="PRs Welcome"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mxoizzz/LeetWrite-AI?style=for-the-badge&color=8b5cf6" alt="License"/></a>
+  </p>
+
+  <p align="center">
     <a href="#features">Features</a>
     ·
     <a href="#tech-stack">Tech Stack</a>
@@ -12,6 +21,8 @@
     <a href="#getting-started">Getting Started</a>
     ·
     <a href="#architecture">Architecture</a>
+    ·
+    <a href="#contributing">Contributing</a>
   </p>
 </div>
 
@@ -28,41 +39,39 @@ This project is built to production-ready SaaS standards, featuring a sleek, dar
 - **Instant Generation:** Paste your code and receive a meticulously crafted LeetCode discussion post in seconds.
 - **AI-Powered:** Driven by the ultra-fast OpenRouter `deepseek/deepseek-chat` model.
 - **Robust Validation:** Frontend strict schema validation via Zod ensures only clean requests reach the server.
-- **Resilient Backend:** Modular AI Service integration featuring graceful exception handling and strict JSON parsing.
+- **Resilient Backend:** Modular AI Service integration featuring graceful exponential backoff and strict JSON parsing.
 - **Sleek UI/UX:** Built with a curated dark-mode design system utilizing Tailwind CSS v4, Inter, and JetBrains Mono typography.
 - **Stateless Architecture:** No databases, no auth—just lightning-fast, stateless API passthrough.
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Framework:** Next.js (App Router)
-- **Styling:** Tailwind CSS v4
+- **Framework:** [Next.js (App Router)](https://nextjs.org/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
 - **Language:** TypeScript
 - **Validation:** Zod
-- **Typography:** Inter (Sans), JetBrains Mono (Code)
 
 ### Backend
-- **Framework:** Spring Boot 3
+- **Framework:** [Spring Boot 3](https://spring.io/projects/spring-boot)
 - **Language:** Java 21+
-- **AI Integration:** OpenRouter Chat Completions API
+- **AI Integration:** [OpenRouter Chat Completions API](https://openrouter.ai/)
 - **JSON Parsing:** Jackson Databind
 
 ---
 
 ## ⚙️ Getting Started
 
-To get a local copy up and running, follow these steps.
+Want to run LeetWrite AI locally or contribute? Follow these steps!
 
 ### Prerequisites
 - [Node.js](https://nodejs.org/en/) (v18 or higher)
 - [Java 21](https://adoptium.net/) (or higher)
-- [Maven](https://maven.apache.org/) (or use the provided wrapper)
 - An active [OpenRouter API Key](https://openrouter.ai/)
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/yourusername/leetwrite-ai.git
-cd leetwrite-ai
+git clone https://github.com/mxoizzz/LeetWrite-AI.git
+cd LeetWrite-AI
 ```
 
 ### 2. Backend Setup
@@ -109,47 +118,38 @@ cd leetwrite-ai
 ## 🏗 Architecture & Design Philosophy
 
 The project adheres to strict Separation of Concerns (SoC) principles:
-- **Frontend (`/frontend`):** Exclusively handles UI state, user interactions, Zod-based data validation, and markdown rendering. It delegates all heavy lifting to the backend.
-- **Backend (`/backend`):** Acts as a secure, stateless proxy layer. It safely houses the external API keys, formats the system/user prompts, orchestrates communication with the AI provider (OpenRouter), and standardizes errors.
+- **Frontend (`/frontend`):** Exclusively handles UI state, user interactions, Zod-based data validation, and markdown rendering. It delegates all heavy computational and API work to the backend.
+- **Backend (`/backend`):** Acts as a secure, stateless proxy layer. It safely houses the external API keys, formats the system/user prompts, orchestrates communication with the AI provider, and standardizes errors.
 
 **Modular AI Strategy:**  
 The AI integration is abstracted behind the `AIService` interface. Switching from OpenRouter to OpenAI, Anthropic, or Gemini simply requires injecting a new `AIService` implementation—no core logic changes required.
 
 ---
 
-## 📜 API Reference
+## 🤝 Contributing
 
-### Generate Discussion Post
-`POST /api/v1/generate`
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-**Request Body**
-```json
-{
-  "problemUrl": "https://leetcode.com/problems/two-sum",
-  "language": "JAVA",
-  "code": "class Solution { public int[] twoSum... }"
-}
-```
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-**Successful Response (200 OK)**
-```json
-{
-  "title": "...",
-  "intuition": "...",
-  "approach": "...",
-  "timeComplexity": "O(n)",
-  "spaceComplexity": "O(n)",
-  "formattedCode": "...",
-  "keyTakeaways": ["...", "..."]
-}
-```
+If you find a bug or have a feature request, please [open an issue](https://github.com/mxoizzz/LeetWrite-AI/issues).
 
 ---
+
+## 👨‍💻 Author
+
+**Moiz Shaikh (@mxoizzz)**
+* [GitHub](https://github.com/mxoizzz)
 
 ## 📄 License
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="center">
+  <br/>
   <i>Crafted with precision for LeetCoders by Software Engineers.</i>
 </p>
