@@ -5,7 +5,6 @@ import { GenerateResponse, ApiError } from "@/lib/schemas";
 import { LoadingSkeleton } from "./LoadingSkeleton";
 import { Button } from "@/components/ui/button";
 import { Copy, Check, AlertCircle, Edit2, Eye } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface PreviewPanelProps {
   data: GenerateResponse | null;
@@ -20,6 +19,11 @@ export function PreviewPanel({ data, isLoading, error }: PreviewPanelProps) {
 
   useEffect(() => {
     if (data) {
+      // Ensure code doesn't get double wrapped if the backend already wrapped it
+      const codeBlock = data.formattedCode.trim().startsWith('\`\`\`') 
+        ? data.formattedCode 
+        : \`\`\`java\n${data.formattedCode}\n\`\`\`;
+
       setMarkdown(`
 # ${data.title}
 
@@ -34,9 +38,7 @@ ${data.approach}
 - Space complexity: ${data.spaceComplexity}
 
 ## Code
-\`\`\`java
-${data.formattedCode}
-\`\`\`
+${codeBlock}
 
 ## Key Takeaways
 ${data.keyTakeaways.map(t => `- ${t}`).join("\n")}
@@ -82,6 +84,36 @@ ${data.keyTakeaways.map(t => `- ${t}`).join("\n")}
       </div>
     );
   }
+
+  // Parse current markdown state so the visual preview reflects manual edits!
+  const getSection = (header: string, nextHeader?: string) => {
+    const regex = nextHeader 
+      ? new RegExp(`## ${header}\\n([\\s\\S]*?)(?=## ${nextHeader}|$)`, 'i')
+      : new RegExp(`## ${header}\\n([\\s\\S]*)`, 'i');
+    const match = markdown.match(regex);
+    return match ? match[1].trim() : "";
+  };
+
+  const titleMatch = markdown.match(/^# (.*)/);
+  const displayTitle = titleMatch ? titleMatch[1].trim() : data.title;
+  
+  const displayIntuition = getSection("Intuition", "Approach") || data.intuition;
+  const displayApproach = getSection("Approach", "Complexity") || data.approach;
+  
+  const complexityBlock = getSection("Complexity", "Code");
+  const timeMatch = complexityBlock.match(/- Time complexity:\s*(.*)/i);
+  const spaceMatch = complexityBlock.match(/- Space complexity:\s*(.*)/i);
+  const displayTime = timeMatch ? timeMatch[1].trim() : data.timeComplexity;
+  const displaySpace = spaceMatch ? spaceMatch[1].trim() : data.spaceComplexity;
+
+  let displayCode = getSection("Code", "Key Takeaways") || data.formattedCode;
+  // Strip backticks for visual preview only
+  displayCode = displayCode.replace(/^```[\w]*\n/, '').replace(/\n```$/, '');
+
+  const takeawaysBlock = getSection("Key Takeaways");
+  const displayTakeaways = takeawaysBlock 
+    ? takeawaysBlock.split('\\n').filter(line => line.trim().startsWith('-')).map(line => line.replace(/^- /, '').trim())
+    : data.keyTakeaways;
 
   return (
     <div className="h-full flex flex-col bg-transparent overflow-hidden relative">
@@ -135,24 +167,24 @@ ${data.keyTakeaways.map(t => `- ${t}`).join("\n")}
         ) : (
           <div className="space-y-12">
             <div>
-              <h1 className="font-[var(--font-bebas)] text-4xl md:text-5xl text-foreground tracking-tight mb-4 uppercase">{data.title}</h1>
+              <h1 className="font-[var(--font-bebas)] text-4xl md:text-5xl text-foreground tracking-tight mb-4 uppercase">{displayTitle}</h1>
             </div>
 
             <section>
               <h2 className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-4">01 / Intuition</h2>
-              <div className="text-sm font-sans text-muted-foreground leading-relaxed whitespace-pre-wrap">{data.intuition}</div>
+              <div className="text-sm font-sans text-muted-foreground leading-relaxed whitespace-pre-wrap">{displayIntuition}</div>
             </section>
 
             <section>
               <h2 className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-4">02 / Approach</h2>
-              <div className="text-sm font-sans text-muted-foreground leading-relaxed whitespace-pre-wrap">{data.approach}</div>
+              <div className="text-sm font-sans text-muted-foreground leading-relaxed whitespace-pre-wrap">{displayApproach}</div>
             </section>
 
             <section>
               <h2 className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-4">03 / Complexity</h2>
               <ul className="space-y-3 font-mono text-sm text-foreground">
-                <li className="flex items-center"><span className="text-muted-foreground w-16">TIME:</span> {data.timeComplexity}</li>
-                <li className="flex items-center"><span className="text-muted-foreground w-16">SPACE:</span> {data.spaceComplexity}</li>
+                <li className="flex items-center"><span className="text-muted-foreground w-16">TIME:</span> {displayTime}</li>
+                <li className="flex items-center"><span className="text-muted-foreground w-16">SPACE:</span> {displaySpace}</li>
               </ul>
             </section>
 
@@ -161,7 +193,7 @@ ${data.keyTakeaways.map(t => `- ${t}`).join("\n")}
               <div className="bg-secondary/30 border border-border/40 p-6 overflow-x-auto relative group">
                 <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                 <pre className="text-xs font-mono text-foreground leading-loose">
-                  <code>{data.formattedCode}</code>
+                  <code>{displayCode}</code>
                 </pre>
               </div>
             </section>
@@ -169,7 +201,7 @@ ${data.keyTakeaways.map(t => `- ${t}`).join("\n")}
             <section>
               <h2 className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-4">05 / Takeaways</h2>
               <ul className="space-y-3 font-sans text-sm text-muted-foreground">
-                {data.keyTakeaways.map((takeaway, idx) => (
+                {displayTakeaways.map((takeaway, idx) => (
                   <li key={idx} className="flex items-start gap-4 leading-relaxed">
                     <span className="text-accent mt-1 text-xs">◆</span>
                     {takeaway}
