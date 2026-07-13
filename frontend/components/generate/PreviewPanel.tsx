@@ -123,7 +123,7 @@ ${data.keyTakeaways.map(t => `- ${t}`).join("\n")}
 
         <section>
           <h2 className="font-mono text-[10px] text-accent uppercase tracking-[0.2em] mb-4">04 / Code</h2>
-          <div className="bg-[#050505] border border-border/40 p-6 overflow-x-auto relative group">
+          <div className="bg-secondary/30 border border-border/40 p-6 overflow-x-auto relative group">
             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
             <pre className="text-xs font-mono text-foreground leading-loose">
               <code>{data.formattedCode}</code>
