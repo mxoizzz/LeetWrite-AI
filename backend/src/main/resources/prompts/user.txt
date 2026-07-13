@@ -1,0 +1,7 @@
+Problem URL: %s
+Language: %s
+
+Here is the accepted code:
+```%s
+%s
+```
