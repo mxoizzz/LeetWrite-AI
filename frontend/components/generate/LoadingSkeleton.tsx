@@ -33,7 +33,7 @@ export function LoadingSkeleton() {
       {/* Code block */}
       <div className="space-y-4">
         <div className="h-3 bg-border/40 w-24 mb-6"></div>
-        <div className="h-48 bg-[#050505] border border-border/40 w-full"></div>
+        <div className="h-48 bg-secondary/30 border border-border/40 w-full"></div>
       </div>
     </div>
   );
