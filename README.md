@@ -1,156 +1,178 @@
 <div align="center">
-  <img src="https://img.icons8.com/color/96/000000/code.png" alt="Logo" width="80" height="80">
-  <h1 align="center">LeetWrite AI</h1>
+  <h1 align="center">LEETWRITE AI</h1>
   
   <p align="center">
-    <strong>A production-ready AI tool that automatically generates high-quality, professional LeetCode discussion posts from your accepted solutions.</strong>
+    <strong>A production-grade AI engine that automatically generates high-quality, professional LeetCode discussion posts from accepted solutions.</strong>
   </p>
   
   <p align="center">
-    <a href="https://github.com/mxoizzz/LeetWrite-AI/stargazers"><img src="https://img.shields.io/github/stars/mxoizzz/LeetWrite-AI?style=for-the-badge&color=eab308" alt="Stars Badge"/></a>
-    <a href="https://github.com/mxoizzz/LeetWrite-AI/network/members"><img src="https://img.shields.io/github/forks/mxoizzz/LeetWrite-AI?style=for-the-badge&color=3b82f6" alt="Forks Badge"/></a>
-    <a href="https://github.com/mxoizzz/LeetWrite-AI/pulls"><img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge&color=10b981" alt="PRs Welcome"/></a>
-    <a href="https://github.com/mxoizzz/LeetWrite-AI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mxoizzz/LeetWrite-AI?style=for-the-badge&color=8b5cf6" alt="License"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/stargazers"><img src="https://img.shields.io/github/stars/mxoizzz/LeetWrite-AI?style=for-the-badge&color=000000" alt="Stars Badge"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/network/members"><img src="https://img.shields.io/github/forks/mxoizzz/LeetWrite-AI?style=for-the-badge&color=000000" alt="Forks Badge"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/pulls"><img src="https://img.shields.io/badge/PRs-welcome-000000.svg?style=for-the-badge" alt="PRs Welcome"/></a>
+    <a href="https://github.com/mxoizzz/LeetWrite-AI/blob/main/LICENSE"><img src="https://img.shields.io/github/license/mxoizzz/LeetWrite-AI?style=for-the-badge&color=000000" alt="License"/></a>
   </p>
 
   <p align="center">
-    <a href="#features">Features</a>
+    <a href="#overview">Overview</a>
     ·
-    <a href="#tech-stack">Tech Stack</a>
+    <a href="#architecture--design-philosophy">Architecture</a>
     ·
     <a href="#getting-started">Getting Started</a>
     ·
-    <a href="#architecture">Architecture</a>
-    ·
-    <a href="#contributing">Contributing</a>
+    <a href="#deployment">Deployment</a>
   </p>
 </div>
 
 ---
 
-## 🚀 Overview
-
-**LeetWrite AI** acts as a senior software engineer by your side. It takes your accepted LeetCode solution and magically transforms it into a clean, markdown-formatted discussion post. It automatically breaks down your algorithm, identifies time and space complexities, extracts key takeaways, and crafts a clear "Intuition" and "Approach" section. 
-
-This project is built to production-ready SaaS standards, featuring a highly-polished brutalist dark-themed UI built with Next.js, and a highly modular, decoupled Spring Boot backend. 
-
-## ✨ Features
-
-- **Instant Generation:** Paste your code and receive a meticulously crafted LeetCode discussion post in seconds.
-- **AI-Powered:** Driven by the ultra-fast OpenRouter `deepseek/deepseek-chat` model.
-- **Robust Validation:** Frontend strict schema validation via Zod ensures only clean requests reach the server.
-- **Resilient Backend:** Modular AI Service integration featuring graceful exponential backoff and strict JSON parsing.
-- **Sleek Brutalist UI:** Built with a highly-polished, typography-heavy brutalist aesthetic utilizing GSAP for animations, Tailwind CSS, Bebas Neue, and IBM Plex Mono typography.
-- **Dedicated Docs:** Comprehensive built-in documentation page to ensure you get the perfect output every time.
-- **Stateless Architecture:** No databases, no auth—just lightning-fast, stateless API passthrough.
-
-## 🛠 Tech Stack
-
-### Frontend
-- **Framework:** [Next.js (App Router)](https://nextjs.org/)
-- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
-- **Language:** TypeScript
-- **Validation:** Zod
-
-### Backend
-- **Framework:** [Spring Boot 3](https://spring.io/projects/spring-boot)
-- **Language:** Java 21+
-- **AI Integration:** [OpenRouter Chat Completions API](https://openrouter.ai/)
-- **JSON Parsing:** Jackson Databind
+<details>
+  <summary><b>[ INTERACTIVE: SYSTEM DIAGNOSTICS ]</b></summary>
+  <br/>
+  
+  Welcome to the LeetWrite diagnostic shell.
+  
+  <details>
+    <summary><b>> run analyze_workflow.sh</b></summary>
+    <br/>
+    
+    Analyzing algorithmic complexity...<br/>
+    Validating temporal constraints...<br/>
+    Optimization patterns detected.<br/><br/>
+    
+    <details>
+      <summary><b>> run generate_documentation.sh</b></summary>
+      <br/>
+      
+      Success. Output generated in 0.42s.<br/>
+      Proceed to <b>Getting Started</b> to deploy your instance.
+      
+    </details>
+  </details>
+</details>
 
 ---
 
-## ⚙️ Getting Started
+## OVERVIEW
 
-Want to run LeetWrite AI locally or contribute? Follow these steps!
+LeetWrite AI functions as an automated senior engineering proxy. It intercepts raw, accepted algorithm solutions and orchestrates a highly-structured, markdown-formatted technical write-up. The system automatically performs static analysis to deduce time and space complexities, extracts core takeaways, and crafts professional Intuition and Approach documentation.
+
+This project is built to production-ready SaaS standards, featuring a strict brutalist UI constructed with Next.js and a modular, decoupled Spring Boot backend.
+
+## CORE CAPABILITIES
+
+- **Instant Generation:** Transforms raw code into meticulously crafted technical documentation with sub-second latency.
+- **Dynamic Theming Engine:** Built-in Light/Dark mode with a customizable 5-color accent system utilizing dynamic CSS variables.
+- **Markdown Synchronization:** Features a seamless, dual-pane architecture where raw Markdown edits instantly reflect in the visual rendering.
+- **Robust Validation:** Frontend strict schema validation via Zod ensures only sanitized payloads reach the backend infrastructure.
+- **Resilient Backend:** Modular AI Service integration featuring graceful exponential backoff and strict JSON parsing logic.
+- **Stateless Architecture:** Operates with zero persistent database dependencies; a pure, lightning-fast stateless API proxy.
+
+## TECH STACK
+
+**Frontend Infrastructure**
+- Framework: Next.js (App Router)
+- Styling Engine: Tailwind CSS v4
+- Language: TypeScript
+- Validation: Zod
+
+**Backend Infrastructure**
+- Framework: Spring Boot 3
+- Runtime: Java 21+
+- Containerization: Docker (Multi-stage build)
+- AI Integration: OpenRouter API Proxy
+
+---
+
+## GETTING STARTED
+
+The following instructions detail the local development setup for both the frontend and backend services.
 
 ### Prerequisites
-- [Node.js](https://nodejs.org/en/) (v18 or higher)
-- [Java 21](https://adoptium.net/) (or higher)
-- An active [OpenRouter API Key](https://openrouter.ai/)
+- Node.js (v18 or higher)
+- Java 21 (or higher)
+- Active OpenRouter API Key
 
-### 1. Clone the repository
+### Repository Initialization
 ```bash
 git clone https://github.com/mxoizzz/LeetWrite-AI.git
 cd LeetWrite-AI
 ```
 
-### 2. Backend Setup
+### Backend Configuration
 
 1. Navigate to the backend directory:
    ```bash
    cd backend
    ```
-2. Create a `.env` file from the example template:
+2. Create the environment configuration:
    ```bash
    cp .env.example .env
    ```
-3. Open `.env` and add your OpenRouter API Key:
+3. Populate `.env` with the required credentials:
    ```env
    OPENROUTER_API_KEY=your_actual_api_key_here
    OPENROUTER_BASE_URL=https://openrouter.ai/api/v1
    OPENROUTER_MODEL=deepseek/deepseek-chat
    SERVER_PORT=8081
    ```
-4. Run the Spring Boot server (ensure the `.env` variables are loaded in your terminal context):
+4. Initialize the Spring Boot server:
    ```bash
    ./mvnw spring-boot:run
    ```
-   *The backend will start listening on `http://localhost:8081`.*
+   *The backend will initialize and bind to `http://localhost:8081`.*
 
-### 3. Frontend Setup
+### Frontend Configuration
 
-1. Open a new terminal tab and navigate to the frontend directory:
+1. Open a secondary terminal and navigate to the frontend directory:
    ```bash
    cd frontend
    ```
-2. Install the dependencies:
+2. Install dependencies:
    ```bash
    npm install
    ```
-3. Start the Next.js development server:
+3. Initialize the Next.js development server:
    ```bash
    npm run dev
    ```
-   *The frontend will start running on `http://localhost:3000`.*
+   *The frontend will compile and bind to `http://localhost:3000`.*
 
 ---
 
-## 🏗 Architecture & Design Philosophy
+## DEPLOYMENT
 
-The project adheres to strict Separation of Concerns (SoC) principles:
-- **Frontend (`/frontend`):** Exclusively handles UI state, user interactions, Zod-based data validation, and markdown rendering. It delegates all heavy computational and API work to the backend.
-- **Backend (`/backend`):** Acts as a secure, stateless proxy layer. It safely houses the external API keys, formats the system/user prompts, orchestrates communication with the AI provider, and standardizes errors.
+This repository is pre-configured for immediate deployment to modern cloud infrastructure.
 
-**Modular AI Strategy:**  
-The AI integration is abstracted behind the `AIService` interface. Switching from OpenRouter to OpenAI, Anthropic, or Gemini simply requires injecting a new `AIService` implementation—no core logic changes required.
+**Backend (Render)**
+The backend includes a highly-optimized, multi-stage `Dockerfile` and dynamic port binding logic. Import the repository into Render as a Docker Web Service, specify the root directory as `backend`, and provide the `OPENROUTER_API_KEY` environment variable.
 
----
-
-## 🤝 Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-If you find a bug or have a feature request, please [open an issue](https://github.com/mxoizzz/LeetWrite-AI/issues).
+**Frontend (Vercel)**
+The frontend is built for Vercel. Import the repository, set the Root Directory to `frontend`, ensure the Framework Preset is set to Next.js, and inject the backend URL via the `NEXT_PUBLIC_API_URL` environment variable.
 
 ---
 
-## 👨‍💻 Author
+## ARCHITECTURE & DESIGN PHILOSOPHY
+
+The project strictly adheres to Separation of Concerns (SoC) principles:
+- **Frontend (`/frontend`):** Exclusively handles UI state, client-side validation, theme management, and dynamic markdown rendering.
+- **Backend (`/backend`):** Functions as a secure, stateless proxy layer. It sanitizes prompts, orchestrates communication with the LLM provider, and standardizes payload structures.
+
+**Modular AI Strategy**
+The core AI integration is abstracted behind a primary `AIService` interface. Migrating execution from OpenRouter to alternatives such as OpenAI, Anthropic, or Gemini requires solely injecting a new interface implementation, leaving the core application logic untouched.
+
+---
+
+## AUTHOR
 
 **Moiz Shaikh (@mxoizzz)**
-* [GitHub](https://github.com/mxoizzz)
+* GitHub: [github.com/mxoizzz](https://github.com/mxoizzz)
+* LinkedIn: [in/moizshaikh007](https://www.linkedin.com/in/moizshaikh007/)
 
-## 📄 License
+## LICENSE
 
 Distributed under the MIT License. See `LICENSE` for more information.
 
 <p align="center">
   <br/>
-  <i>Crafted with precision for LeetCoders by Software Engineers.</i>
+  <i>Crafted with precision for competitive engineers.</i>
 </p>
