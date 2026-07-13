@@ -122,22 +122,24 @@ export function ColophonSection() {
 
         {/* Contact */}
         <div className="col-span-1">
-          <h4 className="font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground mb-4">Contact</h4>
+          <h4 className="font-mono text-[9px] uppercase tracking-[0.3em] text-muted-foreground mb-4">Creator</h4>
           <ul className="space-y-2">
             <li>
               <a
-                href="mailto:hello@leetwrite.dev"
+                href="https://github.com/mxoizzz"
+                target="_blank"
                 className="font-mono text-xs text-foreground/80 hover:text-accent transition-colors duration-200"
               >
-                Email
+                GitHub (@mxoizzz)
               </a>
             </li>
             <li>
               <a
-                href="#"
+                href="https://x.com/mxoizzz"
+                target="_blank"
                 className="font-mono text-xs text-foreground/80 hover:text-accent transition-colors duration-200"
               >
-                Twitter/X
+                X (Twitter)
               </a>
             </li>
           </ul>
@@ -159,7 +161,7 @@ export function ColophonSection() {
         className="mt-24 pt-8 border-t border-border/20 flex flex-col md:flex-row md:items-center md:justify-between gap-4"
       >
         <p className="font-mono text-[10px] text-muted-foreground uppercase tracking-widest">
-          © 2026 LeetWrite. All rights reserved.
+          © 2026 LeetWrite. Designed & Built by <a href="https://github.com/mxoizzz" target="_blank" className="text-foreground hover:text-accent transition-colors">Moiz Shaikh</a>.
         </p>
         <p className="font-mono text-[10px] text-muted-foreground">Write beautiful discussions. Powered by AI.</p>
       </div>
