@@ -32,7 +32,7 @@
 
 **LeetWrite AI** acts as a senior software engineer by your side. It takes your accepted LeetCode solution and magically transforms it into a clean, markdown-formatted discussion post. It automatically breaks down your algorithm, identifies time and space complexities, extracts key takeaways, and crafts a clear "Intuition" and "Approach" section. 
 
-This project is built to production-ready SaaS standards, featuring a sleek, dark-themed UI with Next.js, and a highly modular, decoupled Spring Boot backend. 
+This project is built to production-ready SaaS standards, featuring a highly-polished brutalist dark-themed UI built with Next.js, and a highly modular, decoupled Spring Boot backend. 
 
 ## ✨ Features
 
@@ -40,7 +40,8 @@ This project is built to production-ready SaaS standards, featuring a sleek, dar
 - **AI-Powered:** Driven by the ultra-fast OpenRouter `deepseek/deepseek-chat` model.
 - **Robust Validation:** Frontend strict schema validation via Zod ensures only clean requests reach the server.
 - **Resilient Backend:** Modular AI Service integration featuring graceful exponential backoff and strict JSON parsing.
-- **Sleek UI/UX:** Built with a curated dark-mode design system utilizing Tailwind CSS v4, Inter, and JetBrains Mono typography.
+- **Sleek Brutalist UI:** Built with a highly-polished, typography-heavy brutalist aesthetic utilizing GSAP for animations, Tailwind CSS, Bebas Neue, and IBM Plex Mono typography.
+- **Dedicated Docs:** Comprehensive built-in documentation page to ensure you get the perfect output every time.
 - **Stateless Architecture:** No databases, no auth—just lightning-fast, stateless API passthrough.
 
 ## 🛠 Tech Stack
