@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { CustomCursor } from "@/components/custom-cursor";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -8,7 +9,7 @@ const inter = Inter({
 });
 
 const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-geist-mono", // keep variable name for compat with globals.css or rename
+  variable: "--font-geist-mono",
   subsets: ["latin"],
 });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
       style={{ colorScheme: 'dark' }}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+        <CustomCursor />
         {children}
       </body>
     </html>

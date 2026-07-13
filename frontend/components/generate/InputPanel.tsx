@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { GenerateInput, generateSchema } from "@/lib/schemas";
 import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface InputPanelProps {
   onGenerate: (data: GenerateInput) => Promise<void>;
@@ -63,12 +64,12 @@ export function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
   const isFormEmpty = !formData.problemUrl || !formData.code;
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col h-full bg-surface border border-border-subtle rounded-lg p-6">
-      <div className="space-y-6 flex-1 overflow-y-auto pr-2 custom-scrollbar">
+    <form onSubmit={handleSubmit} className="flex flex-col h-full bg-background p-6">
+      <div className="space-y-8 flex-1 overflow-y-auto pr-2 custom-scrollbar">
         
         {/* Problem URL */}
-        <div className="space-y-2">
-          <label htmlFor="problemUrl" className="text-sm font-medium text-text-primary">
+        <div className="space-y-3">
+          <label htmlFor="problemUrl" className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
             Problem URL
           </label>
           <input
@@ -80,16 +81,17 @@ export function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
             onChange={handleChange}
             onBlur={handleBlur}
             disabled={isLoading}
-            className={`w-full h-10 px-3 rounded-md bg-background border text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-border-strong focus:border-border-strong disabled:opacity-50 transition-colors ${
-              errors.problemUrl ? "border-error focus:ring-error focus:border-error" : "border-border-subtle"
-            }`}
+            className={cn(
+              "w-full h-12 px-4 bg-accent/5 border text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-0 focus:border-accent disabled:opacity-50 transition-colors rounded-none",
+              errors.problemUrl ? "border-destructive focus:border-destructive" : "border-border/40"
+            )}
           />
-          {errors.problemUrl && <p className="text-xs text-error mt-1">{errors.problemUrl}</p>}
+          {errors.problemUrl && <p className="text-xs text-destructive mt-1 font-mono">{errors.problemUrl}</p>}
         </div>
 
         {/* Language */}
-        <div className="space-y-2">
-          <label htmlFor="language" className="text-sm font-medium text-text-primary">
+        <div className="space-y-3">
+          <label htmlFor="language" className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
             Language
           </label>
           <select
@@ -98,7 +100,7 @@ export function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
             value={formData.language}
             onChange={handleChange}
             disabled={isLoading}
-            className="w-full h-10 px-3 rounded-md bg-background border border-border-subtle text-sm text-text-primary focus:outline-none focus:ring-2 focus:ring-border-strong focus:border-border-strong disabled:opacity-50 transition-colors"
+            className="w-full h-12 px-4 bg-accent/5 border border-border/40 text-sm font-mono text-foreground focus:outline-none focus:ring-0 focus:border-accent disabled:opacity-50 transition-colors rounded-none"
           >
             {SUPPORTED_LANGUAGES.map((lang) => (
               <option key={lang} value={lang}>
@@ -109,8 +111,8 @@ export function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
         </div>
 
         {/* Code */}
-        <div className="space-y-2 flex flex-col h-full min-h-[300px]">
-          <label htmlFor="code" className="text-sm font-medium text-text-primary">
+        <div className="space-y-3 flex flex-col h-full min-h-[300px]">
+          <label htmlFor="code" className="text-xs font-mono uppercase tracking-widest text-muted-foreground">
             Accepted Solution
           </label>
           <textarea
@@ -122,29 +124,30 @@ export function InputPanel({ onGenerate, isLoading }: InputPanelProps) {
             onBlur={handleBlur}
             disabled={isLoading}
             spellCheck={false}
-            className={`flex-1 w-full p-4 rounded-md bg-background border font-mono text-sm text-text-primary placeholder:text-text-tertiary focus:outline-none focus:ring-2 focus:ring-border-strong focus:border-border-strong disabled:opacity-50 resize-none transition-colors ${
-              errors.code ? "border-error focus:ring-error focus:border-error" : "border-border-subtle"
-            }`}
+            className={cn(
+              "flex-1 w-full p-4 bg-accent/5 border font-mono text-sm text-foreground placeholder:text-muted-foreground/40 focus:outline-none focus:ring-0 focus:border-accent disabled:opacity-50 resize-none transition-colors rounded-none",
+              errors.code ? "border-destructive focus:border-destructive" : "border-border/40"
+            )}
           />
-          {errors.code && <p className="text-xs text-error mt-1">{errors.code}</p>}
+          {errors.code && <p className="text-xs text-destructive mt-1 font-mono">{errors.code}</p>}
         </div>
 
       </div>
 
       {/* Actions */}
-      <div className="pt-6 mt-4 border-t border-border-subtle">
+      <div className="pt-6 mt-4 border-t border-border/40">
         <Button 
           type="submit" 
           disabled={isLoading || hasErrors || isFormEmpty}
-          className="w-full h-12 text-base"
+          className="w-full h-14 text-sm font-mono uppercase tracking-widest bg-foreground text-background hover:bg-accent hover:text-accent-foreground rounded-none"
         >
           {isLoading ? (
             <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Structuring discussion...
+              <Loader2 className="mr-3 h-4 w-4 animate-spin" />
+              GENERATING...
             </>
           ) : (
-            "Generate Discussion"
+            "GENERATE DISCUSSION"
           )}
         </Button>
       </div>
