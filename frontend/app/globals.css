@@ -72,6 +72,26 @@
   --sidebar-ring: oklch(0.7 0.2 45);
 }
 
+:root[data-color="blue"] {
+  --accent: oklch(0.65 0.2 250);
+  --ring: oklch(0.65 0.2 250);
+}
+
+:root[data-color="green"] {
+  --accent: oklch(0.7 0.2 150);
+  --ring: oklch(0.7 0.2 150);
+}
+
+:root[data-color="magenta"] {
+  --accent: oklch(0.65 0.2 330);
+  --ring: oklch(0.65 0.2 330);
+}
+
+:root[data-color="yellow"] {
+  --accent: oklch(0.8 0.18 90);
+  --ring: oklch(0.8 0.18 90);
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;

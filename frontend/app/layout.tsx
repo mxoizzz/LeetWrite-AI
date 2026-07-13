@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { CustomCursor } from "@/components/custom-cursor";
+import { ColorPicker } from "@/components/color-picker";
 
 const inter = Inter({
   variable: "--font-sans",
@@ -31,6 +32,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
         <CustomCursor />
+        <ColorPicker />
         {children}
       </body>
     </html>
