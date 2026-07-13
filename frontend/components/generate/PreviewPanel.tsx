@@ -22,7 +22,7 @@ export function PreviewPanel({ data, isLoading, error }: PreviewPanelProps) {
       // Ensure code doesn't get double wrapped if the backend already wrapped it
       const codeBlock = data.formattedCode.trim().startsWith('\`\`\`') 
         ? data.formattedCode 
-        : \`\`\`java\n${data.formattedCode}\n\`\`\`;
+        : `\`\`\`java\n${data.formattedCode}\n\`\`\``;
 
       setMarkdown(`
 # ${data.title}
