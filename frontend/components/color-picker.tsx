@@ -16,6 +16,7 @@ const COLORS = [
 export function ColorPicker() {
   const [activeColor, setActiveColor] = useState("orange");
   const [mounted, setMounted] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const { theme, setTheme } = useTheme();
 
   useEffect(() => {
@@ -37,8 +38,15 @@ export function ColorPicker() {
 
   return (
     <div className="fixed bottom-6 right-6 z-[100] flex flex-col items-center gap-3">
-      <div className="group relative flex flex-col-reverse items-center gap-2">
-        <div className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-none border border-border/50 bg-background/80 backdrop-blur transition-colors hover:border-accent">
+      <div 
+        className="group relative flex flex-col-reverse items-center gap-2"
+        onMouseEnter={() => setIsOpen(true)}
+        onMouseLeave={() => setIsOpen(false)}
+      >
+        <div 
+          className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-none border border-border/50 bg-background/80 backdrop-blur transition-colors hover:border-accent"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           <span 
             className="block h-4 w-4 rounded-full" 
             style={{ backgroundColor: COLORS.find(c => c.id === activeColor)?.hex }}
@@ -46,7 +54,10 @@ export function ColorPicker() {
         </div>
         
         {/* Expanded Palette and Theme Toggle */}
-        <div className="absolute bottom-12 flex flex-col gap-2 p-2 border border-border/50 bg-background/95 backdrop-blur opacity-0 translate-y-4 pointer-events-none transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+        <div className={cn(
+          "absolute bottom-12 flex flex-col gap-2 p-2 border border-border/50 bg-background/95 backdrop-blur transition-all duration-300",
+          isOpen ? "opacity-100 translate-y-0 pointer-events-auto" : "opacity-0 translate-y-4 pointer-events-none"
+        )}>
           
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
