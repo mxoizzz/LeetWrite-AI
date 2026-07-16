@@ -1,0 +1,72 @@
+[
+  {
+    "title": "Understanding GCD of Odd and Even Sums Through Mathematical Insight",
+    "intuition": "The problem reduces to recognizing that the GCD of the sum of odd and even digits in a number is simply the number itself when the number is 1, as there are no other digits to consider. For larger numbers, a more complex approach would be needed to compute the sums of odd and even digits separately before finding their GCD.",
+    "approach": "1. **Problem Analysis**: The task is to find the GCD of the sum of odd-positioned digits and the sum of even-positioned digits in a given number.\n2. **Base Case Handling**: For n = 1, the sum of odd digits is 1 (the number itself), and there are no even digits, making the GCD trivially 1.\n3. **General Case**: For n > 1, we would need to:\n   - Separate the digits of the number.\n   - Sum the digits at odd positions and even positions separately.\n   - Compute the GCD of these two sums.\n4. **Edge Cases**: The current implementation handles only the minimal case where n = 1, suggesting a need for expansion to handle larger numbers.",
+    "timeComplexity": "O(1)",
+    "spaceComplexity": "O(1)",
+    "formattedCode": "```java\nclass Solution {\n    public int gcdOfOddEvenSums(int n) {\n        return n;\n    }\n}\n```",
+    "keyTakeaways": [
+      "For minimal inputs, the solution can be trivial, but understanding the general case is crucial for scalability.",
+      "The problem highlights the importance of digit manipulation and mathematical operations like GCD in algorithmic challenges."
+    ],
+    "_url": "https://leetcode.com/problems/gcd-of-odd-and-even-sums/description/",
+    "_code": "class Solution {\n    public int gcdOfOddEvenSums(int n) {\n        return n;\n    }\n}"
+  },
+  {
+    "title": "Counting Even-Digit Numbers via String Conversion",
+    "intuition": "The problem requires counting how many numbers in an array have an even number of digits. The straightforward approach is to convert each number to a string and check if its length is even.",
+    "approach": "1. Initialize a counter to zero.\n2. Iterate through each number in the input array.\n3. Convert the current number to a string.\n4. Check if the length of this string is even.\n5. If it is, increment the counter.\n6. Return the counter after processing all numbers.",
+    "timeComplexity": "O(N * D), where N is the number of elements and D is the average number of digits per element. This is because converting each number to a string takes time proportional to its digit count.",
+    "spaceComplexity": "O(D), where D is the maximum number of digits in any number. This is due to the temporary string storage during conversion.",
+    "formattedCode": "```java\nclass Solution {\n    public int findNumbers(int[] nums) {\n        int count = 0;\n        for(int n : nums){\n            if(String.valueOf(n).length() % 2 == 0){\n                count++;\n            }\n        }\n        return count;\n    }\n}\n```",
+    "keyTakeaways": [
+      "String conversion provides a simple way to count digits.",
+      "Iterate through each element when checking a condition across an array."
+    ],
+    "_url": "https://leetcode.com/problems/find-numbers-with-even-number-of-digits/description/",
+    "_code": "class Solution {\n    public int findNumbers(int[] nums) {\n        int count = 0;\n        for(int n : nums){\n            if(String.valueOf(n).length() % 2 == 0){\n                count++;\n            }\n        }\n        return count;\n    }\n}"
+  },
+  {
+    "title": "Efficiently Calculating the Sum of GCDs for Formed Pairs",
+    "intuition": "The problem requires computing the sum of GCDs for all possible pairs in a sorted list of prefix GCDs. By first calculating the GCD of each element with the maximum element up to that point, we create a prefix GCD array. Sorting this array ensures that pairing the smallest and largest elements minimizes redundant GCD calculations and maximizes efficiency.",
+    "approach": "1. **Compute Max Array**: First, compute an array `mx` where each element `mx[i]` is the maximum value in the original array up to index `i`.\n2. **Compute Prefix GCD**: Using the `mx` array, calculate the GCD of each element in the original array with its corresponding `mx[i]`, storing results in `prefixGcd`.\n3. **Sort and Pair GCDs**: Sort the `prefixGcd` array and pair the smallest and largest elements, calculating their GCD and summing these values.\n4. **Return the Sum**: The final sum of these GCDs is returned as the result.",
+    "timeComplexity": "O(n log n + n log max(nums))",
+    "spaceComplexity": "O(n)",
+    "formattedCode": "```java\nclass Solution {\n    private int gcd(int a, int b){\n        while(b!=0){\n            int temp = b;\n            b = a%b;\n            a = temp;\n        }\n        return Math.abs(a);\n    }\n    public long gcdSum(int[] nums) {\n        int[] mx = new int[nums.length];\n        mx[0] = nums[0];\n        for(int i = 1;i<nums.length;i++){\n            mx[i] = Math.max(mx[i-1],nums[i]);\n        }\n        int[] prefixGcd = new int[nums.length];\n        for(int i = 0;i<nums.length;i++){\n            prefixGcd[i] = gcd(nums[i],mx[i]);\n        } \n        Arrays.sort(prefixGcd);\n        int i = 0,j = nums.length-1;\n        long sum = 0;\n        while(i<j){\n            sum+=gcd(prefixGcd[i],prefixGcd[j]);\n            i++;\n            j--;\n        }\n        return sum;\n    }\n}\n```",
+    "keyTakeaways": [
+      "Sorting the prefix GCD array allows efficient pairing of elements to compute their GCD.",
+      "Using prefix GCDs reduces redundant computations and improves performance."
+    ],
+    "_url": "https://leetcode.com/problems/sum-of-gcd-of-formed-pairs/description/",
+    "_code": "class Solution {\n    private int gcd(int a, int b){\n        while(b!=0){\n            int temp = b;\n            b = a%b;\n            a = temp;\n        }\n        return Math.abs(a);\n    }\n    public long gcdSum(int[] nums) {\n        int[] mx = new int[nums.length];\n        mx[0] = nums[0];\n        for(int i = 1;i<nums.length;i++){\n            mx[i] = Math.max(mx[i-1],nums[i]);\n        }\n        int[] prefixGcd = new int[nums.length];\n        for(int i = 0;i<nums.length;i++){\n            prefixGcd[i] = gcd(nums[i],mx[i]);\n        } \n        Arrays.sort(prefixGcd);\n        int i = 0,j = nums.length-1;\n        long sum = 0;\n        while(i<j){\n            sum+=gcd(prefixGcd[i],prefixGcd[j]);\n            i++;\n            j--;\n        }\n        return sum;\n    }\n}"
+  },
+  {
+    "title": "Efficient Duplicate Detection Using Hash Set",
+    "intuition": "The problem requires checking for any duplicate elements in an array. The key insight is that a hash set provides O(1) average time complexity for insertion and lookup operations, making it ideal for tracking seen elements.",
+    "approach": "1. Initialize an empty hash set to track seen elements.\n2. Iterate through each element in the input array:\n   - If the element exists in the set, return true (duplicate found).\n   - Otherwise, add the element to the set.\n3. If the loop completes without finding duplicates, return false.",
+    "timeComplexity": "O(n), where n is the number of elements. Each insertion and lookup operation in the hash set is O(1) on average, and we perform these operations n times.",
+    "spaceComplexity": "O(n), as we may store all elements in the hash set in the worst case (no duplicates).",
+    "formattedCode": "```java\nclass Solution {\n    public boolean containsDuplicate(int[] nums) {\n        HashSet<Integer> seen = new HashSet<>();\n        for(int num: nums){\n            if(seen.contains(num)){\n                return true;\n            }\n            seen.add(num);\n        }\n        return false;\n    }\n}\n```",
+    "keyTakeaways": [
+      "Hash sets provide constant-time average case operations for insertion and lookup, making them ideal for duplicate detection.",
+      "The space-time tradeoff here is linear space for linear time complexity."
+    ],
+    "_url": "https://leetcode.com/problems/contains-duplicate/description/",
+    "_code": "class Solution {\n    public boolean containsDuplicate(int[] nums) {\n        HashSet<Integer> seen = new HashSet<>();\n        for(int num: nums){\n            if(seen.contains(num)){\n                return true;\n            }\n            seen.add(num);\n        }\n        return false;\n    }\n}"
+  },
+  {
+    "title": "Efficient Word Count Analysis in Sentences",
+    "intuition": "The problem requires finding the maximum number of words in any sentence from a given array. Since words are separated by spaces, counting spaces in each sentence and adding 1 gives the word count. The solution iterates through each sentence, counts spaces, and tracks the maximum count.",
+    "approach": "1. Initialize a variable `max` to store the maximum word count found.\n2. Iterate through each sentence in the input array.\n3. For each sentence, initialize a counter `count` to 1 (since the number of words is always one more than the number of spaces).\n4. Iterate through each character in the sentence, incrementing `count` for each space encountered.\n5. Update `max` with the higher value between its current value and `count`.\n6. After processing all sentences, return `max` as the result.",
+    "timeComplexity": "O(n * m), where n is the number of sentences and m is the average length of sentences. This is because we process each character in every sentence.",
+    "spaceComplexity": "O(1), as we only use a constant amount of extra space for variables `max` and `count`.",
+    "formattedCode": "```java\nclass Solution {\n    public int mostWordsFound(String[] sentences) {\n        int max = 0;\n\n        for (String sentence : sentences) {\n            int count = 1;\n            for (int i = 0; i < sentence.length(); i++) {\n                if (sentence.charAt(i) == ' ') {\n                    count++;\n                }\n            }\n            max = Math.max(max, count);\n        }\n\n        return max;\n    }\n}\n```",
+    "keyTakeaways": [
+      "Counting spaces is an efficient way to determine word count in sentences.",
+      "The problem demonstrates how simple character iteration can solve string processing tasks."
+    ],
+    "_url": "https://leetcode.com/problems/maximum-number-of-words-found-in-sentences/description/",
+    "_code": "class Solution {\n    public int mostWordsFound(String[] sentences) {\n        int max = 0;\n\n        for (String sentence : sentences) {\n            int count = 1;\n            for (int i = 0; i < sentence.length(); i++) {\n                if (sentence.charAt(i) == ' ') {\n                    count++;\n                }\n            }\n            max = Math.max(max, count);\n        }\n\n        return max;\n    }\n}"
+  }
+]
