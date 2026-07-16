@@ -33,10 +33,17 @@ public class GenerateService {
             throw new ApiException(ErrorCode.INVALID_LANGUAGE, "Language not supported", HttpStatus.BAD_REQUEST, "language");
         }
 
-        String systemPrompt = promptManager.getSystemPrompt();
-        String userPrompt = promptManager.buildUserPrompt(request.getProblemUrl(), language, request.getCode());
-        
-        String rawResponse = aiService.generateContent(systemPrompt, userPrompt);
-        return responseParser.parse(rawResponse);
+        // Pass 1: Generation
+        String generationSystemPrompt = promptManager.buildGenerationSystemPrompt();
+        String generationUserPrompt = promptManager.buildGenerationUserPrompt(request.getProblemUrl(), language, request.getCode());
+        String generatedMarkdown = aiService.generateContent(generationSystemPrompt, generationUserPrompt);
+
+        // Pass 2: Reviewer
+        String reviewerSystemPrompt = promptManager.buildReviewerSystemPrompt();
+        String reviewerUserPrompt = promptManager.buildReviewerUserPrompt(generatedMarkdown);
+        String finalMarkdown = aiService.generateContent(reviewerSystemPrompt, reviewerUserPrompt);
+
+        // Parse final markdown into structured JSON schema for frontend
+        return responseParser.parse(finalMarkdown);
     }
 }
