@@ -12,7 +12,7 @@ public class PromptManager {
     
     private String systemPrompt;
     private String generationPrompt;
-    private String reviewerPrompt;
+    private String editorPrompt;
     private String markdownPrompt;
     private String rulesPrompt;
     private String stylePrompt;
@@ -24,7 +24,7 @@ public class PromptManager {
         String basePath = "prompts"; // Read from current working directory (backend)
         systemPrompt = readFile(basePath, "system.md");
         generationPrompt = readFile(basePath, "generation.md");
-        reviewerPrompt = readFile(basePath, "reviewer.md");
+        editorPrompt = readFile(basePath, "editor.md");
         markdownPrompt = readFile(basePath, "markdown.md");
         rulesPrompt = readFile(basePath, "rules.md");
         stylePrompt = readFile(basePath, "style.md");
@@ -51,10 +51,10 @@ public class PromptManager {
         );
     }
 
-    public String buildReviewerSystemPrompt() {
+    public String buildEditorSystemPrompt() {
         return String.join("\n\n============================================================\n\n",
             systemPrompt,
-            reviewerPrompt,
+            editorPrompt,
             markdownPrompt,
             rulesPrompt,
             stylePrompt,
@@ -68,7 +68,7 @@ public class PromptManager {
             problemUrl, language, language.toLowerCase(), code);
     }
 
-    public String buildReviewerUserPrompt(String generatedMarkdown) {
-        return "Please review and improve the following generated LeetCode discussion according to your reviewer guidelines.\n\n" + generatedMarkdown;
+    public String buildEditorUserPrompt(String generatedMarkdown) {
+        return "Please transform this draft into the FINAL publication-ready LeetCode discussion. Do NOT output any conversational text or review comments. Output ONLY the final markdown article.\n\n" + generatedMarkdown;
     }
 }

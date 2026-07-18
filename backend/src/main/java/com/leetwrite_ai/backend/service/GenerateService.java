@@ -43,11 +43,11 @@ public class GenerateService {
         String generatedMarkdown = aiService.generateContent(generationSystemPrompt, generationUserPrompt);
         log.info("=== GENERATION OUTPUT ===\n{}\n=========================", generatedMarkdown);
 
-        // Pass 2: Reviewer
-        String reviewerSystemPrompt = promptManager.buildReviewerSystemPrompt();
-        String reviewerUserPrompt = promptManager.buildReviewerUserPrompt(generatedMarkdown);
-        String finalMarkdown = aiService.generateContent(reviewerSystemPrompt, reviewerUserPrompt);
-        log.info("=== REVIEWER OUTPUT ===\n{}\n=======================", finalMarkdown);
+        // Pass 2: Editor
+        String editorSystemPrompt = promptManager.buildEditorSystemPrompt();
+        String editorUserPrompt = promptManager.buildEditorUserPrompt(generatedMarkdown);
+        String finalMarkdown = aiService.generateContent(editorSystemPrompt, editorUserPrompt);
+        log.info("=== EDITOR OUTPUT ===\n{}\n=======================", finalMarkdown);
 
         // Parse final markdown into structured JSON schema for frontend
         return responseParser.parse(finalMarkdown);
