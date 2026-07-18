@@ -6,12 +6,16 @@ import com.leetwrite_ai.backend.dto.GenerateRequest;
 import com.leetwrite_ai.backend.dto.GenerateResponse;
 import com.leetwrite_ai.backend.exception.ApiException;
 import com.leetwrite_ai.backend.exception.ErrorCode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
 @Service
 public class GenerateService {
+
+    private static final Logger log = LoggerFactory.getLogger(GenerateService.class);
 
     private final AIService aiService;
     private final PromptManager promptManager;
@@ -37,11 +41,13 @@ public class GenerateService {
         String generationSystemPrompt = promptManager.buildGenerationSystemPrompt();
         String generationUserPrompt = promptManager.buildGenerationUserPrompt(request.getProblemUrl(), language, request.getCode());
         String generatedMarkdown = aiService.generateContent(generationSystemPrompt, generationUserPrompt);
+        log.info("=== GENERATION OUTPUT ===\n{}\n=========================", generatedMarkdown);
 
         // Pass 2: Reviewer
         String reviewerSystemPrompt = promptManager.buildReviewerSystemPrompt();
         String reviewerUserPrompt = promptManager.buildReviewerUserPrompt(generatedMarkdown);
         String finalMarkdown = aiService.generateContent(reviewerSystemPrompt, reviewerUserPrompt);
+        log.info("=== REVIEWER OUTPUT ===\n{}\n=======================", finalMarkdown);
 
         // Parse final markdown into structured JSON schema for frontend
         return responseParser.parse(finalMarkdown);
